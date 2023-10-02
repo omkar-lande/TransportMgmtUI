@@ -1,0 +1,13 @@
+.form-group{
+    margin-top: 15px;
+}
+.custom-rounded {
+    border-radius: 30px; /* You can adjust the value to control the roundness */
+}
+.required-asterisk::after {
+    content: " *"; /* Add an asterisk after the content */
+    color: red; /* Set the color to red or any desired color */
+}
+/* .form1{
+    height:550px;
+} */

@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-body" *ngIf="instruction">                
+                    <h3>Instructions Detail Of {{instructionClientName}}  &  Instruction ID: {{ instructionId }}</h3>
+                    <dx-data-grid [dataSource]="[instruction.Instruction]" [showBorders]="true"
+                        [columnAutoWidth]="true">
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <dxo-sorting [mode]="'single'"></dxo-sorting>
+                        <dxo-search-panel [visible]="false"></dxo-search-panel>
+                        <dxi-column dataField="InstructionDate" alignment="center" [width]="120"
+                            caption="Instruction Date"></dxi-column>
+                        <dxi-column dataField="ClientName" alignment="center" caption="Client Name"></dxi-column>
+                        <dxi-column [width]="180" dataField="PickupAddress" caption="Pickup Address"></dxi-column>
+                        <dxi-column [width]="180" dataField="DeliveryAddress" caption="Delivery Address"></dxi-column>
+                        <dxi-column dataField="TotalQuantity"  alignment="center" [width]="120" caption="Total Quantity"></dxi-column>
+                        <dxi-column dataField="TotalProducts"  alignment="center" [width]="120" caption="Total Products"></dxi-column>
+                        <dxi-column dataField="TotalPrice" alignment="center" caption="Total Price"></dxi-column>
+                        <dxi-column dataField="Status" alignment="center" caption="Status"></dxi-column>
+
+                    </dx-data-grid>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-1">
+            <br><br><br>
+        </div>
+        <div class="col-10" *ngIf="instruction">    
+            <app-product-grid [(products)]="instruction.Instruction.ProductList" (productsChange)="productsChange()"></app-product-grid>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-1">
+            <br><br><br>
+        </div>
+
+        <div class="col-10" >
+            <app-schedule-transport *ngIf="instruction" [instruction]="instruction" [savedTransporterProducts]="savedTransporterProducts" [(products)]="toscheduleProducts"
+                (productsChange)="productsChange()">
+            </app-schedule-transport>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+</div>

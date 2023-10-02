@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h2 class="card-title">Instructions</h2>
+                        </div>
+                        <dx-button class="btn btn-primary btn-sm mb-2 d-flex" text="Create New Instruction"
+                            stylingMode="outlined" icon="add" routerLink="/createNewInstruction">
+                        </dx-button>
+                    </div>
+                    <div class="table-responsive">
+                        <dx-data-grid height="480" class="centered-columns" [dataSource]="instructions"
+                            [showBorders]="true" [columnAutoWidth]="true">
+
+                            <dxo-paging [pageSize]="10"></dxo-paging>
+                            <dxo-sorting [mode]="'single'"></dxo-sorting>
+                            <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+                            <dxi-column dataField="Instruction.InstructionId" dataType="number" alignment="center"
+                                caption="Instruction Id"></dxi-column>
+                            <dxi-column dataField="Instruction.InstructionDate" dataType="date" alignment="center"
+                                caption="Instruction Date">
+
+                            </dxi-column>
+                            <dxi-column dataField="Instruction.ClientName" alignment="center" dataType="string"
+                                caption="Client Name"></dxi-column>
+
+                            <dxi-column dataField="Status" caption="Status" alignment="center" dataType="string">
+                                <dxo-lookup [dataSource]="statusOptions" displayExpr="text"
+                                    valueExpr="value"></dxo-lookup>
+                            </dxi-column>
+                            <!-- <dxi-column dataField="Icon" caption="Edit" [cellTemplate]="cellTemplate"> -->
+                            <dxi-column dataField="Icon" caption="Add Transporter" dataType="boolean"
+                                cellTemplate="cellTemplate" >
+                                <div *dxTemplate="let data of 'cellTemplate'" class="pointer-cursor">
+                                    <div>
+                                        <fa-icon [routerLink]="['/view-details', data.data.Instruction?.InstructionId]"
+                                            [icon]="plusIcon"></fa-icon>
+                                    </div>
+                                </div>
+                            </dxi-column>
+                        </dx-data-grid>
+                        <!-- <fa-icon [icon]="filmIcon"></fa-icon>
+                        <fa-icon [icon]="faCoffee"></fa-icon> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

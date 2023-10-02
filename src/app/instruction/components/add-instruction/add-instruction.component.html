@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form class="form1 mt-4 mb-4 shadow bg-light px-3 py-3 custom-rounded">
+                <div class="row">
+                    <div class="col-md-6" style="border-right: 1px solid #e7e1e1;">
+                        <h3 class="mt-2">Instruction Details </h3>
+                        <div class="form-group">
+                            <label for="instructionDate" class="required-asterisk">Instruction Date</label>
+                            <dx-date-box required [(ngModel)]="addInstructionRequest.Instruction.InstructionDate"
+                                id="InstructionDate" name="InstructionDate" labelMode="floating" required>
+                            </dx-date-box>
+                        </div>
+                        <div class="form-group">
+                            <label for="ClientName" class="required-asterisk">Client Name</label>
+
+                            <dx-select-box [(ngModel)]="selectedClientId" id="ClientName" name="ClientName"
+                                [dataSource]="clientNames" [displayExpr]="'name'" [valueExpr]="'id'" [searchEnabled]="true">
+                            </dx-select-box>
+
+                        </div>
+                     
+                        <div class="form-group">
+                            <label for="PickupAddress" class="required-asterisk">Pickup Address</label>
+
+                            <dx-text-area [(ngModel)]="addInstructionRequest.Instruction.PickupAddress"
+                                id="PickupAddress" name="PickupAddress" placeholder="Enter PickupAddress" required>
+                            </dx-text-area>
+                        </div>
+                        <div class="form-group">
+                            <label for="DeliveryAddress" class="required-asterisk">Delivery Address</label>
+                         
+                            <dx-text-area [(ngModel)]="addInstructionRequest.Instruction.DeliveryAddress"
+                                id="DeliveryAddress" name="DeliveryAddress" placeholder="DeliveryAddress" required>
+                            </dx-text-area>
+                        </div>
+                    </div>
+
+                    <div #productDetails class="col-md-6">
+                        <h3 class="mt-2">Product Details </h3>
+                    
+
+                        <dx-data-grid id="gridContainer" [dataSource]="products" keyExpr="ID"
+                            [allowColumnReordering]="true" [showBorders]="true" (onRowInserted)="onRowInserted()">
+                            <dxo-paging [enabled]="true"></dxo-paging>
+                            <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
+                            </dxo-editing>
+                            <dxi-column dataField="ProductId" caption="ProductName" [width]="125"
+                                [setCellValue]="setCellValue">
+                                <dxo-lookup [dataSource]="productNames" displayExpr="productName" valueExpr="productId">
+                                </dxo-lookup>
+                                <dxi-validation-rule type="required"
+                                    message="Product is required"></dxi-validation-rule>
+                            </dxi-column>
+                            <dxi-column dataField="ProductDescription" caption="Product Description"
+                                [allowEditing]="false"></dxi-column>
+
+                            <dxi-column [allowEditing]="false" dataField="ProductPrice" caption="Product Price"></dxi-column>
+                                
+                            <dxi-column dataField="Quantity" dataType="number" [setCellValue]="setQtyCellValue">
+                                <dxi-validation-rule type="required" message="Qty is required"></dxi-validation-rule>
+                                <dxi-validation-rule type="custom" [validationCallback]="validateRange()"
+                                    message="Minimum 1 Qty required"></dxi-validation-rule>
+                            </dxi-column>
+                        </dx-data-grid>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-5"></div>
+                    <div class="col-1 d-flex">
+                        <dx-button class="btn btn-sm btn-primary mt-2 mx-2 align-items-center"
+                            (click)="addInstruction() ">
+                            Submit
+                        </dx-button>
+                        <dx-button class="btn btn-sm btn-secondary mt-2 align-items-center" (click)="clearForm()">
+                            Clear
+                        </dx-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<dx-toast [height]="50" width="300" [(visible)]="showError" type="error" [message]="message">
+</dx-toast>

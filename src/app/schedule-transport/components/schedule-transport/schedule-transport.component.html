@@ -1,0 +1,37 @@
+<h3>Schedule Transporter</h3>
+
+<dx-data-grid class="custom-data-grid" [dataSource]="toScheduleProducts" keyExpr="instructionProductId"
+    [showBorders]="true" (onRowUpdated)="onRowUpdated($event)">
+    <dxo-paging [pageSize]="4" [enabled]="true"></dxo-paging>
+    <dxo-editing mode="row" [allowUpdating]="true">
+    </dxo-editing>
+
+    <dxi-column dataField="productName" alignment="center" [allowEditing]="false" caption="Product Name"></dxi-column>
+    <dxi-column dataField="productDescription" [allowEditing]="false" caption="Product Description"
+        [width]="200"></dxi-column>
+    <dxi-column dataField="productPrice" [allowEditing]="false" caption="Product Price"></dxi-column>
+    <dxi-column dataField="productQuantity" alignment="center" [allowEditing]="false" caption="Quantity"></dxi-column>
+
+    <dxi-column dataField="transporterId" alignment="center" caption="Transporter" [width]="200">
+        <dxo-lookup [dataSource]="transporters" displayExpr="name" valueExpr="id">
+        </dxo-lookup>
+        <dxi-validation-rule type="required" message="Transporter is required"></dxi-validation-rule>
+    </dxi-column>
+
+    <dxi-column dataField="ScheduledDate" alignment="center" caption="Scheduled Date" dataType="date"
+        [editorOptions]="{ type: 'date', defaultDate: initialScheduledDate, value: dateBoxValue }">
+        <!-- <dxi-validation-rule type="required" message="Scheduled Date is required"></dxi-validation-rule> -->
+    </dxi-column>
+</dx-data-grid>
+<div class="row mt-2">
+    <div class="col-4">
+
+    </div>
+    <div class="col-1">
+        <button class="btn btn-sm btn-primary" (click)="updateInstruction()">Update</button>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-sm btn-secondary" (click)="backToInstruction()">Back To Instruction</button>
+    </div>
+    <div class="col-3"></div>
+</div>

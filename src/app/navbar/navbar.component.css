@@ -1,0 +1,40 @@
+.hover-link {
+    text-decoration: none; /* Remove underline from the link */
+    color: #000; /* Set the default text color */
+    transition: background-color 0.3s; /* Add a smooth transition effect */
+    width: 100%; /* Set width to 100% to fill the box horizontally */
+    height: 100%; /* Set height to 100% to fill the box vertically */
+    transition: background-color 0.3s;
+}
+
+.hover-link:hover {
+    background-color: red; /* Change background color to red on hover */
+}
+
+li{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.navbar .navbar-nav .nav-link {
+    padding: 0.5em;
+  }
+  .navbar .navbar-brand {
+    padding: 0 0.6em;
+  }
+  @media only screen and (min-width: 992px) {
+    .navbar {
+      padding: 0;
+    }
+    .navbar .navbar-nav .nav-link {
+      padding: 1em 0.7em;
+    }
+    .navbar .navbar-brand {
+      padding: 0 0.8em;
+    }
+  }
+.navbar .navbar-nav .nav-link {
+    padding: 1.2em 1.2em;
+    transition: all 0.5s;
+  }

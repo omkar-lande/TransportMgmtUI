@@ -1,0 +1,21 @@
+
+<h3>Product Details</h3>
+
+<div *ngIf="products" class="table-responsive">
+  <dx-data-grid class="custom-data-grid"  [dataSource]="products" [showBorders]="true" [columnAutoWidth]="true">
+    <dxo-paging [pageSize]="4"></dxo-paging>
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
+
+    <dxi-column dataField="productName" alignment="center" caption="Product Name"></dxi-column>
+
+    <dxi-column dataField="productDescription" caption="Product Description"></dxi-column>
+    <dxi-column dataField="productQuantity" alignment="center" caption="Quantity"></dxi-column>
+   
+
+    <dxi-column dataField="transporterName" alignment="center" caption="Transporter Name"></dxi-column>
+
+    <dxi-column dataField="scheduledDate" alignment="center" caption="Scheduled Date" dataType="date">
+
+    </dxi-column>
+  </dx-data-grid>
+</div>
